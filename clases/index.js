@@ -1,2 +1,7 @@
 const { Personaje } = require("./Personaje.js");
-module.exports = { Personaje }
+const { ArqueroMedio } = require("./ArqueroMedio.js");
+const { GuerreroEnano } = require("./GuerreroEnano.js");
+const { MagoElfo } = require("./MagoElfo.js");
+const { Paladin } = require("./Paladin.js");
+
+module.exports = { ArqueroMedio, Paladin, GuerreroEnano, MagoElfo };
