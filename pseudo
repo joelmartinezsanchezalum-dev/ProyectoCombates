@@ -1,0 +1,27 @@
+COMBATE:
+
+1. quien ataca:
+
+    if (jugador1_velocidad > jugador2_velocidad)
+        let daño = atk1 || atk2 (random)
+        ataca j1
+        esquive (bool) = j2.esquivar
+        
+        if (!esquive)
+            j2_vida -= daño;
+    else
+        daño = atk1 | atk2 (random)
+        ataca j2
+        esquive (bool) = j2.esquivar
+
+        if (!esquive)
+            j2_vida -= daño;
+
+
+    prioridad(j0, j1){
+        if (j0.vel  > j1.vel){
+            return [j0, j1]
+        } else {
+            return [j1, j0]
+        }
+    }
