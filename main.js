@@ -1,4 +1,5 @@
 const { Paladin } = require("./clases")
+const fs = require("fs")
 
 const prompt = require("prompt-sync")({ sigint: true })
 
@@ -11,6 +12,24 @@ function mostrarMenu() {
     console.log("4- Arquero Mediano")
 };
 
-let fsdf = new Paladin();
 
-console.log(fsdf.poder);
+function verEstadisticas() {
+    if (!fs.existsSync("./estadisticas.csv")) {
+        fs.writeFileSync("./estadisticas.csv","")
+        verEstadisticas()
+    } else {
+        let buffer = fs.readFileSync("./estadisticas.csv")
+        let informacion = buffer.toString().split(/\r?\n/).join("\n")
+        console.log(informacion)
+    }
+}
+function crearEstadisticas(boleano){
+    let victoria = Number
+    let derrota = Number
+    let partidasJugadas = Number
+    if (boleano == true){
+        fs.appendFileSync("./estadisticas.csv",(victoria+1)+";"+derrota+";"+(partidasJugadas+1))
+    }else {        fs.appendFileSync("./estadisticas.csv",victoria+";"+(derrota+1)+";"+(partidasJugadas+1))
+}
+}
+verEstadisticas()
