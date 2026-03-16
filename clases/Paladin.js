@@ -22,8 +22,3 @@ class Paladin extends Personaje {
         return (this.poder * 1.25)
     }
 }
-
-let paladin = new Paladin()
-
-console.log(paladin.esquivar());
-console.log(paladin.vida);
