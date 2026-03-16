@@ -1,13 +1,13 @@
 const { Personaje } = require("./Personaje");
 
 class MagoElfo extends Personaje {
+    static nameAtaque1 = "Bola de fuego";
+    static nameAtaque1 = "Electrocutar";
 
     constructor() {
         this.vida = 40;
         this.poder = 45;
         this.velocidad = 15;
-        this.nameAtaque1 = " Bola de fuego "
-        this.nameAtaque2 = " Electrocutar "
     }
 
     ataque1() {
