@@ -10,7 +10,3 @@ function mostrarMenu() {
     console.log("3- Guerrero Enano")
     console.log("4- Arquero Mediano")
 };
-
-let fsdf = new Paladin();
-
-console.log(fsdf.poder);
