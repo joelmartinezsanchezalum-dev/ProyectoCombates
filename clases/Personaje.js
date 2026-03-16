@@ -52,7 +52,11 @@ class Personaje {
     ataque1() { }
     ataque2() { }
 
-    #esquivar() { }
+    esquivar() {
+        let dodge = (Math.random() * 100)
+        dodge = (dodge <= this.velocidad)
+        return dodge;
+    }
 }
 
 module.exports.Personaje = Personaje;
