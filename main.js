@@ -1,3 +1,5 @@
+const { Paladin } = require("./clases")
+
 const prompt = require("prompt-sync")({ sigint: true })
 
 // Menu principal 
@@ -7,4 +9,8 @@ function mostrarMenu() {
     console.log("2- Mago Elfo ")
     console.log("3- Guerrero Enano")
     console.log("4- Arquero Mediano")
-}
+};
+
+let fsdf = new Paladin();
+
+console.log(fsdf.poder);
