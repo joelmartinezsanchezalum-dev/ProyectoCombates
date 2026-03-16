@@ -1,18 +1,21 @@
 class Personaje {
+    vida
+    poder
+    velocidad
 
-    vida 
-    #poder
-    #velocidad
+    nameAtaque1
+    nameAtaque2
 
-    #nameAtaque1
-    #nameAtaque2
+    constructor() { }
 
-    constructor(){}
+    ataque1() { }
+    ataque2() { }
 
-    ataque1(){}
-    ataque2(){}
-
-    #esquivar(){}
+    esquivar() {
+        let dodge = (Math.random() * 100)
+        dodge = (dodge <= this.velocidad)
+        return dodge;
+    }
 }
 
 module.exports.Personaje = Personaje;
