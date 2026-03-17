@@ -49,14 +49,14 @@ class Personaje {
         this.#nameAtaque2 = nameAtaque2;
     }
 
-    ataque1() { }
-    ataque2() { }
+    ataque1() { };
+    ataque2() { };
 
     esquivar() {
-        let dodge = (Math.random() * 100)
-        dodge = (dodge <= this.velocidad)
+        let dodge = (Math.random() * 100);
+        dodge = (dodge <= this.velocidad);
         return dodge;
-    }
-}
+    };
+};
 
 module.exports.Personaje = Personaje;

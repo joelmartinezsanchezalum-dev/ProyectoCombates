@@ -5,11 +5,8 @@ class MagoElfo extends Personaje {
     static nameAtaque1 = "Electrocutar";
 
     constructor() {
-<<<<<<< HEAD
-=======
         super();
 
->>>>>>> adri
         this.vida = 40;
         this.poder = 45;
         this.velocidad = 15;

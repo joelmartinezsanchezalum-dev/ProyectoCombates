@@ -4,11 +4,8 @@ class GuerreroEnano extends Personaje {
     static nameAtaque1 = "Recuperar Aliento";
     static nameAtaque1 = "Hachazo";
     constructor() {
-<<<<<<< HEAD
-=======
         super();
         
->>>>>>> adri
         this.vida = 90;
         this.poder = 20;
         this.velocidad = 5;
