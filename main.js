@@ -1,5 +1,5 @@
-const { Paladin, MagoElfo, GuerreroEnano, ArqueroMedio } = require("./clases")
-const prompt = require("prompt-sync")({ sigint: true })
+const { Paladin, MagoElfo, GuerreroEnano, ArqueroMedio } = require("./clases");
+const prompt = require("prompt-sync")({ sigint: true });
 
 // Menu principal 
 function mostrarPersonajes() {
@@ -42,6 +42,11 @@ do {
                 break;
 
             case "2":
+                let jugador2 = generarPersonajeRandom();
+
+                do {
+
+                } while (vida > 0);
 
                 prompt("Presiona ENTER para continuar");
                 break;
@@ -59,10 +64,10 @@ do {
     }
 } while (opcion != 4);
 
-function luchar(jugador1) {
+
+function luchar(jugador) {
 
     //Generamos enemigo y calculamos prioridad
-    let jugador2 = generarPersonajeRandom();
     let primeroEnAtacar = esJugadorMasRapido(jugador1, jugador2);
     let daño;
 
@@ -76,36 +81,6 @@ function luchar(jugador1) {
     }
 
     //Miramos si esquiva el enemigo, y le hacemos daño si no lo consigue
-}
 
-function esJugadorMasRapido(j0, j1) {
-    if (j0.velocidad > j1.velocidad) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
-/**
- * Procedimiento que genera un personaje aleatorio de la clase Arquero, Guerrero, Mago o Paladín.
- * @returns Un personaje random de una de las 4 clases;
- */
-function generarPersonajeRandom() {
-    let tipo = Math.round(Math.random() * 3);
-    let personaje;
-    switch (tipo) {
-        case 0:
-            personaje = new Paladin();
-            break;
-        case 1:
-            personaje = new MagoElfo();
-            break;
-        case 2:
-            personaje = new GuerreroEnano();
-            break;
-        case 3:
-            personaje = new ArqueroMedio();
-            break;
-    }
-    return personaje;
 }
