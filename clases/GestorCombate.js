@@ -24,7 +24,7 @@ class GestorCombate {
      * @returns Un personaje random de una de las 4 clases;
      */
     #generarPersonajeRandom() {
-        let tipo = Math.round(Math.random() * 3);
+        let tipo = Math.floor(Math.random() * 3);
         let personaje;
         switch (tipo) {
             case 0:
