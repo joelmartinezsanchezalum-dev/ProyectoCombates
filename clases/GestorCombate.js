@@ -55,19 +55,18 @@ class GestorCombate {
     };
 
     ataque() {
+        let daño;
         for (let x = 0; x < this.jugadores.length; x++) {
             if (!this.jugadores[Number(!x)].esquivar()) {
                 let numAtaque = Math.round(Math.random());
-                let daño = numAtaque ? this.jugadores[Number(x)].ataque1() : this.jugadores[x].ataque2();
+                daño = numAtaque ? this.jugadores[Number(x)].ataque1() : this.jugadores[x].ataque2();
 
                 this.jugadores[Number(!x)].vida -= daño;
-                console.log("ha atacado");
+                console.log(`${this.jugadores[x]} ha causado ${daño} de daño a ${this.jugadores[Number(!x)]}`);
             };
         };
         return;
     };
-
-
 };
 
 module.exports.GestorCombate = GestorCombate; 

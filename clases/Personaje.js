@@ -30,7 +30,8 @@ class Personaje {
     };
 
     set vida(vida) {
-        this.#vida = vida;
+        this.#vida = Math.min(vida, this.#vida);
+        this.#vida = Math.max(vida, 0);
     }
 
     set poder(poder) {

@@ -68,9 +68,15 @@ do {
                 break;
 
             case "3":
-                let gest = new GestorCombate(personaje);
-                gest.ataque();
-                prompt("Presiona ENTER para continuar");
+                let gestor = new GestorCombate(personaje);
+
+                do {
+                    gestor.ataque();
+                    prompt("Presiona ENTER para continuar");
+                } while (gestor.jugadores[0].vida > 0 && gestor.jugadores[1].vida > 0);
+
+                console.log("\npartida acabada");
+                prompt("Presiona ENTER para volver al menu");
 
                 break;
 
@@ -81,4 +87,3 @@ do {
 
     }
 } while (opcion != 4);
-
