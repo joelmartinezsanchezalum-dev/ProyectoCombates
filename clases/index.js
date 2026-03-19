@@ -1,4 +1,3 @@
-const { Personaje } = require("./Personaje.js");
 const { ArqueroMedio } = require("./ArqueroMedio.js");
 const { GuerreroEnano } = require("./GuerreroEnano.js");
 const { MagoElfo } = require("./MagoElfo.js");
