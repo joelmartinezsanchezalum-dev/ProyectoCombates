@@ -1,4 +1,7 @@
-const { Paladin, MagoElfo, GuerreroEnano, ArqueroMedio } = require("./")
+const { Paladin } = require("./Paladin.js");
+const { MagoElfo } = require("./MagoElfo.js");
+const { GuerreroEnano } = require("./GuerreroEnano.js");
+const { ArqueroMedio } = require("./ArqueroMedio.js");
 
 class GestorCombate {
     jugadores
@@ -48,19 +51,23 @@ class GestorCombate {
             return true;
         } else {
             return false;
-        }
-    }
+        };
+    };
 
     ataque() {
         for (let x = 0; x < this.jugadores.length; x++) {
+            if (!this.jugadores[Number(!x)].esquivar()) {
+                let numAtaque = Math.round(Math.random());
+                let daño = numAtaque ? this.jugadores[Number(x)].ataque1() : this.jugadores[x].ataque2();
 
-        }
-    }
+                this.jugadores[Number(!x)].vida -= daño;
+                console.log("ha atacado");
+            };
+        };
+        return;
+    };
+
 
 };
 
-module.exports.GestorCombate = GestorCombate;
-
-let x = new Paladin();
-let n = new GestorCombate(x);
-console.log(n.jugadores);
+module.exports.GestorCombate = GestorCombate; 

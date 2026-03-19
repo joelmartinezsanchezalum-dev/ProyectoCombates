@@ -1,17 +1,12 @@
-const { Paladin, MagoElfo, GuerreroEnano, ArqueroMedio } = require("./clases");
+const { GestorCombate } = require("./clases");
+const { Paladin } = require("./clases");
+const { MagoElfo } = require("./clases");
+const { GuerreroEnano } = require("./clases");
+const { ArqueroMedio } = require("./clases");
+
 const prompt = require("prompt-sync")({ sigint: true });
 
 // Menu principal 
-function mostrarPersonajes() {
-    console.clear();
-
-    console.log("Personajes disponibles:\n");
-    console.log("1- Paladin Humano");
-    console.log("2- Mago Elfo ");
-    console.log("3- Guerrero Enano");
-    console.log("4- Arquero Mediano\n");
-};
-
 function mostrarMenu() {
     console.clear();
 
@@ -22,8 +17,21 @@ function mostrarMenu() {
     console.log("4. Salir\n");
 };
 
+// Mostrar personajes
+function mostrarPersonajes() {
+    console.clear();
+
+    console.log("Personajes disponibles:\n");
+    console.log("1- Paladin Humano");
+    console.log("2- Mago Elfo ");
+    console.log("3- Guerrero Enano");
+    console.log("4- Arquero Mediano\n");
+};
+
+
 let opcion;
 let opcionPersonaje;
+let personaje;
 
 do {
 
@@ -38,22 +46,32 @@ do {
                 mostrarPersonajes();
                 opcionPersonaje = prompt("Elige el personaje: ");
 
-                prompt("Presiona ENTER para continuar");
+                switch (opcionPersonaje) {
+                    case "1":
+                        personaje = new Paladin();
+                        break;
+                    case "2":
+                        personaje = new MagoElfo();
+                        break;
+                    case "3":
+                        personaje = new GuerreroEnano();
+                        break;
+                    case "4":
+                        personaje = new ArqueroMedio();
+                        break;
+                }
+
                 break;
 
             case "2":
-                let jugador2 = generarPersonajeRandom();
-
-                do {
-
-                } while (vida > 0);
-
                 prompt("Presiona ENTER para continuar");
                 break;
 
             case "3":
-
+                let gest = new GestorCombate(personaje);
+                gest.ataque();
                 prompt("Presiona ENTER para continuar");
+
                 break;
 
             case "4":
@@ -64,23 +82,3 @@ do {
     }
 } while (opcion != 4);
 
-
-function luchar(jugador) {
-
-    //Generamos enemigo y calculamos prioridad
-    let primeroEnAtacar = esJugadorMasRapido(jugador1, jugador2);
-    let daño;
-
-    //Miramos el primero en atacar y guardamos el daño que haga un ataque aleatorio
-    if (primeroEnAtacar) {
-        let numAtaque = Math.round(Math.random());
-        daño = numAtaque ? jugador1.ataque1() : jugador1.ataque2();
-    } else {
-        let numAtaque = Math.round(Math.random());
-        daño = numAtaque ? jugador2.ataque1() : jugador2.ataque2();
-    }
-
-    //Miramos si esquiva el enemigo, y le hacemos daño si no lo consigue
-
-
-}
