@@ -1,10 +1,11 @@
+const fs = require("fs");
+const prompt = require("prompt-sync")({ sigint: true });
+
 const { GestorCombate } = require("./clases");
 const { Paladin } = require("./clases");
 const { MagoElfo } = require("./clases");
 const { GuerreroEnano } = require("./clases");
 const { ArqueroMedio } = require("./clases");
-
-const prompt = require("prompt-sync")({ sigint: true });
 
 // Menu principal 
 function mostrarMenu() {
@@ -28,6 +29,59 @@ function mostrarPersonajes() {
     console.log("4- Arquero Mediano\n");
 };
 
+function verEstadisticas() {
+    if (!fs.existsSync("./estadisticas.csv")) {
+        fs.writeFileSync("./estadisticas.csv", "PERSONAJE;VICTORIAS;DERROTAS;PARTIDAS_JUGADAS\nPaladin;0;0;0\nGuerreroEnano;0;0;0\nMagoElfo;0;0;0\nArqueroMedio;0;0;0")
+        verEstadisticas()
+    } else {
+        let buffer = fs.readFileSync("./estadisticas.csv")
+        let informacion = buffer.toString().split(/\r?\n/).join("\n")
+        console.log(informacion)
+    }
+}
+
+function crearEstadisticas(personaje, resultado) {
+    verEstadisticas()
+    let buffer = fs.readFileSync("./estadisticas.csv");
+    let informacion = buffer.toString().split("\n");
+    for (let i = 0; i < 5; i++) {
+        informacion[i] = informacion[i].split(";");
+    }
+    asignacion(personaje, informacion, resultado)
+    for (let i = 0; i < 5; i++) {
+        informacion[i] = informacion[i].join(";");
+    }
+    informacion = informacion.join("\n")
+    fs.writeFileSync("./estadisticas.csv", informacion);
+}
+
+function asignacion(personaje, informacion, resultado) {
+    let victoria = 0;
+    let derrota = 0;
+    let partidas_jugadas = 0;
+    let I = 0;
+    if (personaje == "Paladin") {
+        I = 1;
+    } else if (personaje == "GuerreroEnano") {
+        I = 2;
+    } else if (personaje == "MagoElfo") {
+        I = 3;
+    } else if (personaje == "ArqueroMedio") {
+        I = 4;
+    }
+    victoria = informacion[I][1];
+    derrota = informacion[I][2];
+    partidas_jugadas = informacion[I][3];
+    if (resultado == true) {
+        victoria = Number(victoria) + 1;
+    } else {
+        derrota = Number(derrota) + 1;
+    }
+    partidas_jugadas = Number(partidas_jugadas) + 1;
+    informacion[I][1] = victoria;
+    informacion[I][2] = derrota;
+    informacion[I][3] = partidas_jugadas;
+}
 
 let opcion;
 let opcionPersonaje;
