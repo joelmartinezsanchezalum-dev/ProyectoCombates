@@ -1,10 +1,92 @@
-const { Paladin } = require("./clases")
+const { GestorCombate } = require("./clases");
+const { Paladin } = require("./clases");
+const { MagoElfo } = require("./clases");
+const { GuerreroEnano } = require("./clases");
+const { ArqueroMedio } = require("./clases");
 const fs = require("fs")
 const { Personaje } = require("./clases/Personaje")
-
 const prompt = require("prompt-sync")({ sigint: true })
 
 // Menu principal 
+function mostrarMenu() {
+    console.clear();
+
+    console.log("Bienvenido a ¡COMBATES AUTOMATICOS!\n");
+    console.log("1. Crear nuevo personaje");
+    console.log("2. Ver estadisticas");
+    console.log("3. Luchar");
+    console.log("4. Salir\n");
+};
+
+// Mostrar personajes
+function mostrarPersonajes() {
+    console.clear();
+
+    console.log("Personajes disponibles:\n");
+    console.log("1- Paladin Humano");
+    console.log("2- Mago Elfo ");
+    console.log("3- Guerrero Enano");
+    console.log("4- Arquero Mediano\n");
+};
+
+
+let opcion;
+let opcionPersonaje;
+let personaje;
+
+do {
+
+    mostrarMenu();
+    opcion = prompt("Que desas hacer: ");
+    console.clear();
+
+    if ("1234".includes(opcion)) {
+
+        switch (opcion) {
+            case "1":
+                mostrarPersonajes();
+                opcionPersonaje = prompt("Elige el personaje: ");
+
+                switch (opcionPersonaje) {
+                    case "1":
+                        personaje = new Paladin();
+                        break;
+                    case "2":
+                        personaje = new MagoElfo();
+                        break;
+                    case "3":
+                        personaje = new GuerreroEnano();
+                        break;
+                    case "4":
+                        personaje = new ArqueroMedio();
+                        break;
+                }
+
+                break;
+
+            case "2":
+                prompt("Presiona ENTER para continuar");
+                break;
+
+            case "3":
+                let gest = new GestorCombate(personaje);
+                gest.ataque();
+                prompt("Presiona ENTER para continuar");
+
+                break;
+
+            case "4":
+                prompt("Saliendo...");
+                break;
+        }
+
+    }
+} while (opcion != 4);
+
+
+
+
+// Menu principal
 function mostrarMenu() {
     console.log("Hola jugador, que personaje deseas ser? ")
     console.log("1- Paladin Humano")
@@ -12,7 +94,6 @@ function mostrarMenu() {
     console.log("3- Guerrero Enano")
     console.log("4- Arquero Mediano")
 };
-
 
 function verEstadisticas() {
     if (!fs.existsSync("./estadisticas.csv")) {
@@ -24,7 +105,6 @@ function verEstadisticas() {
         console.log(informacion)
     }
 }
-
 
 function crearEstadisticas(personaje, resultado) {
     verEstadisticas()
@@ -38,7 +118,7 @@ function crearEstadisticas(personaje, resultado) {
         informacion[i] = informacion[i].join(";");
     }
     informacion = informacion.join("\n")
-    fs.writeFileSync("./estadisticas.csv",informacion);
+    fs.writeFileSync("./estadisticas.csv", informacion);
 }
 function asignacion(personaje, informacion, resultado) {
     let victoria = 0;
@@ -58,14 +138,12 @@ function asignacion(personaje, informacion, resultado) {
     derrota = informacion[I][2];
     partidas_jugadas = informacion[I][3];
     if (resultado == true) {
-        victoria = Number(victoria)+1;
+        victoria = Number(victoria) + 1;
     } else {
-        derrota = Number(derrota)+1;
+        derrota = Number(derrota) + 1;
     }
-    partidas_jugadas = Number(partidas_jugadas)+1;
+    partidas_jugadas = Number(partidas_jugadas) + 1;
     informacion[I][1] = victoria;
     informacion[I][2] = derrota;
     informacion[I][3] = partidas_jugadas;
 }
-
-crearEstadisticas("Paladin", true)
