@@ -57,18 +57,22 @@ class GestorCombate {
     ataque() {
         let daño;
         let historial = [];
-        
+
         for (let x = 0; x < this.jugadores.length; x++) {
             if (!this.jugadores[Number(!x)].esquivar()) {
                 let numAtaque = Math.round(Math.random());
                 daño = numAtaque ? this.jugadores[Number(x)].ataque1() : this.jugadores[x].ataque2();
 
                 this.jugadores[Number(!x)].vida -= daño;
-                console.log(`${this.jugadores[x].namePersonaje} ha causado ${daño} de daño a ${this.jugadores[Number(!x)].namePersonaje}`);
+                historial.push(`${this.jugadores[x].namePersonaje} ha causado ${daño} de daño a ${this.jugadores[Number(!x)].namePersonaje}`);
             } else {
-                console.log(this.jugadores[Number(!x)].namePersonaje + " ha esquivado el ataque de " + this.jugadores[Number(x)].namePersonaje);
+                historial.push(`${this.jugadores[Number(!x)].namePersonaje} ha esquivado el ataque de ${this.jugadores[Number(x)].namePersonaje}`);
             };
+
+            // Comprovamos si alguno de los dos jugadores ha muerto
+            (this.jugadores[x].vida <= 0) ? this.victoria = true : this.victoria = false;
         };
+
         return;
     };
 };
