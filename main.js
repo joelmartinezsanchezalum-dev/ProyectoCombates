@@ -69,28 +69,28 @@ function asignacion(personaje, informacion, resultado) {
     let victoria = 0;
     let derrota = 0;
     let partidas_jugadas = 0;
-    let I = 0;
+    let index = 0;
     if (personaje == "Paladin") {
-        I = 1;
+        index = 1;
     } else if (personaje == "GuerreroEnano") {
-        I = 2;
+        index = 2;
     } else if (personaje == "MagoElfo") {
-        I = 3;
+        index = 3;
     } else if (personaje == "ArqueroMedio") {
-        I = 4;
+        index = 4;
     }
-    victoria = informacion[I][1];
-    derrota = informacion[I][2];
-    partidas_jugadas = informacion[I][3];
+    victoria = informacion[index][1];
+    derrota = informacion[index][2];
+    partidas_jugadas = informacion[index][3];
     if (resultado == true) {
         victoria = Number(victoria) + 1;
     } else {
         derrota = Number(derrota) + 1;
     }
     partidas_jugadas = Number(partidas_jugadas) + 1;
-    informacion[I][1] = victoria;
-    informacion[I][2] = derrota;
-    informacion[I][3] = partidas_jugadas;
+    informacion[index][1] = victoria;
+    informacion[index][2] = derrota;
+    informacion[index][3] = partidas_jugadas;
 }
 
 let opcion;
