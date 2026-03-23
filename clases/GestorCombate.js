@@ -73,10 +73,12 @@ class GestorCombate {
             } else {
                 historial.push(`${this.jugadores[Number(!x)].namePersonaje} ha esquivado el ataque de ${this.jugadores[Number(x)].namePersonaje}`);
             };
-
             // Comprovamos si alguno de los dos jugadores ha muerto
-            (this.jugadores[x].vida <= 0) ? this.partidaAcabada = true : this.partidaAcabada = false;
         };
+        (this.jugadores[0].vida == 0 || this.jugadores[1].vida == 0) ? this.partidaAcabada = true : this.partidaAcabada = false;
+
+        console.log(this.jugadores[0].vida);
+        console.log(this.jugadores[1].vida);
 
         return historial;
     };

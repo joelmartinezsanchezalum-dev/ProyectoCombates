@@ -134,9 +134,9 @@ do {
                     let historial = gestor.ataque();
                     console.log(historial);
 
-                    prompt("Presiona ENTER para continuar");          
-                } while (!gestor.victoria);
-                
+                    prompt("Presiona ENTER para continuar");
+                } while (!gestor.partidaAcabada);
+
                 resultado = gestor.checkWin();
                 crearEstadisticas(personaje, resultado);
 
