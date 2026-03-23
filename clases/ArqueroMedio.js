@@ -1,6 +1,7 @@
 const { Personaje } = require("./Personaje.js");
 
 class ArqueroMedio extends Personaje {
+    #namePersonaje
 
     static nameAtaque1 = "Tiro preciso";
     static nameAtaque1 = "Tiro multiple";
@@ -8,10 +9,16 @@ class ArqueroMedio extends Personaje {
     constructor() {
         super();
 
+        this.#namePersonaje = "Arquero Medio";
+
         this.vida = 50;
         this.poder = 30;
         this.velocidad = 20;
     };
+
+    get namePersonaje() {
+        return this.#namePersonaje;
+    }
 
     ataque1() {
         return this.poder;

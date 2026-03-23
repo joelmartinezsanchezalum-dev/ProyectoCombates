@@ -62,11 +62,13 @@ class GestorCombate {
                 daño = numAtaque ? this.jugadores[Number(x)].ataque1() : this.jugadores[x].ataque2();
 
                 this.jugadores[Number(!x)].vida -= daño;
-                console.log(`${this.jugadores[x]} ha causado ${daño} de daño a ${this.jugadores[Number(!x)]}`);
+                console.log(`${this.jugadores[x].namePersonaje} ha causado ${daño} de daño a ${this.jugadores[Number(!x)].namePersonaje}`);
+            } else {
+                console.log(this.jugadores[Number(!x)].namePersonaje + " ha esquivado el ataque de " + this.jugadores[Number(x)].namePersonaje);
             };
         };
         return;
     };
 };
 
-module.exports.GestorCombate = GestorCombate; 
+module.exports.GestorCombate = GestorCombate;
