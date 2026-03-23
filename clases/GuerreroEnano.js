@@ -22,9 +22,10 @@ class GuerreroEnano extends Personaje {
 
     ataque1() {
         this.vida = (this.poder * 1.5) + this.vida;
+        return 0;
     }
     ataque2() {
-        return (this.poder)
+        return (this.poder);
     }
 }
 
