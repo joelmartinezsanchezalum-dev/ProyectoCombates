@@ -4,16 +4,21 @@ const { GuerreroEnano } = require("./GuerreroEnano.js");
 const { ArqueroMedio } = require("./ArqueroMedio.js");
 
 class GestorCombate {
+    usuario
+    maquina
     jugadores
 
-    victoria
-
     rapido
+
+    victoria
 
     constructor(j1) {
         this.victoria = false;
 
-        this.jugadores = [j1, this.#generarPersonajeRandom()]
+        this.usuario = j1;
+        this.maquina = this.#generarPersonajeRandom();
+
+        this.jugadores = [this.usuario, this.maquina];
 
         this.rapido = this.#esJugadorMasRapido();
 
@@ -73,8 +78,17 @@ class GestorCombate {
             (this.jugadores[x].vida <= 0) ? this.victoria = true : this.victoria = false;
         };
 
-        return;
+        return historial;
     };
+
+    checkWin() {
+        if (this.usuario.vida == 0 && this.maquina.vida >= 0) {
+            return false;
+        } else if (this.usuario.vida > 0 && this.maquina.vida == 0) {
+            return true;
+        };
+    };
+
 };
 
 module.exports.GestorCombate = GestorCombate;
