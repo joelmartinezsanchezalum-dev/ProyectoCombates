@@ -77,9 +77,6 @@ class GestorCombate {
         };
         (this.jugadores[0].vida == 0 || this.jugadores[1].vida == 0) ? this.partidaAcabada = true : this.partidaAcabada = false;
 
-        console.log(this.jugadores[0].vida);
-        console.log(this.jugadores[1].vida);
-
         return historial;
     };
 
