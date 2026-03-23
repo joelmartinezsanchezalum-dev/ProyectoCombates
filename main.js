@@ -86,6 +86,7 @@ function asignacion(personaje, informacion, resultado) {
 let opcion;
 let opcionPersonaje;
 let personaje;
+let resultado;
 
 do {
 
@@ -118,18 +119,29 @@ do {
                 break;
 
             case "2":
+                verEstadisticas();
                 prompt("Presiona ENTER para continuar");
                 break;
 
             case "3":
+                if (typeof(personaje) == undefined) return;
+
+                //Creamos el gestor, que nos pone un contrincante aleatorio
                 let gestor = new GestorCombate(personaje);
 
                 do {
+                    //El gestor genera un turno de ataques (ataque aleatorio, ataca el más rápido primero)
                     gestor.ataque();
-                    prompt("Presiona ENTER para continuar");
-                } while (gestor.jugadores[0].vida > 0 && gestor.jugadores[1].vida > 0);
 
-                console.log("\npartida acabada");
+                    //El gestor comprueba si se ha terminado la partida
+                    resultado = gestor.checkWin();
+                    prompt("Presiona ENTER para continuar");
+
+                } while (gestor.victoria);
+
+                crearEstadisticas(personaje, resultado);
+
+                gestor.imprimirResultado();
                 prompt("Presiona ENTER para volver al menu");
 
                 break;
