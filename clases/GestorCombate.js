@@ -10,10 +10,10 @@ class GestorCombate {
 
     rapido
 
-    victoria
+    partidaAcabada
 
     constructor(j1) {
-        this.victoria = false;
+        this.partidaAcabada = false;
 
         this.usuario = j1;
         this.maquina = this.#generarPersonajeRandom();
@@ -75,7 +75,7 @@ class GestorCombate {
             };
 
             // Comprovamos si alguno de los dos jugadores ha muerto
-            (this.jugadores[x].vida <= 0) ? this.victoria = true : this.victoria = false;
+            (this.jugadores[x].vida <= 0) ? this.partidaAcabada = true : this.partidaAcabada = false;
         };
 
         return historial;
