@@ -56,6 +56,8 @@ class GestorCombate {
 
     ataque() {
         let daño;
+        let historial = [];
+        
         for (let x = 0; x < this.jugadores.length; x++) {
             if (!this.jugadores[Number(!x)].esquivar()) {
                 let numAtaque = Math.round(Math.random());
