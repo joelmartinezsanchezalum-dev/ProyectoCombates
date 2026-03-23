@@ -23,11 +23,19 @@ class GuerreroEnano extends Personaje {
 
     ataque1() {
         this.vida = (this.poder * 1.5) + this.vida;
+<<<<<<< HEAD
     };
     
     ataque2() {
         return (this.poder);
     };
+=======
+        return 0;
+    }
+    ataque2() {
+        return (this.poder);
+    }
+>>>>>>> b2dd0051c0d815c5ff26fcbdec020bd07e236cf4
 }
 
 module.exports.GuerreroEnano = GuerreroEnano;
