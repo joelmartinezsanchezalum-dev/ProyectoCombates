@@ -15,7 +15,7 @@ function mostrarMenu() {
     console.log("1. Crear nuevo personaje");
     console.log("2. Ver estadisticas");
     console.log("3. Luchar");
-    console.log("4. Salir\n");
+    console.log("0. Salir\n");
 };
 
 // Mostrar personajes
@@ -133,23 +133,21 @@ do {
                     //El gestor genera un turno de ataques (ataque aleatorio, ataca el más rápido primero)
                     gestor.ataque();
 
-                    //El gestor comprueba si se ha terminado la partida
-                    resultado = gestor.checkWin();
-                    prompt("Presiona ENTER para continuar");
-
-                } while (gestor.victoria);
-
+                    prompt("Presiona ENTER para continuar");          
+                } while (!gestor.victoria);
+                
+                resultado = gestor.checkWin();
                 crearEstadisticas(personaje, resultado);
 
-                gestor.imprimirResultado();
+                gestor.imprimirResultado(resultado);
                 prompt("Presiona ENTER para volver al menu");
 
                 break;
 
-            case "4":
+            case "0":
                 prompt("Saliendo...");
                 break;
         }
 
     }
-} while (opcion != 4);
+} while (opcion != 0);

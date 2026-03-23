@@ -89,6 +89,15 @@ class GestorCombate {
         };
     };
 
+    imprimirResultado(resultado) {
+        if (resultado) {
+            console.log("¡Victoria!");
+            console.log(`El ${this.usuario} del jugador ha derrotado al ${this.maquina} enemigo.`);
+        } else {
+            console.log("Derrota...");
+            console.log(`El ${this.maquina} enemigo ha derrotado al ${this.usuario} del usuario.`);
+        }
+    };
 };
 
 module.exports.GestorCombate = GestorCombate;
