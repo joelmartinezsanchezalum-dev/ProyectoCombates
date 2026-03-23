@@ -24,6 +24,7 @@ class Paladin extends Personaje {
     ataque1() {
         this.vida += this.poder * 0.25;
         return (this.poder * 0.7);
+        
     };
 
     ataque2() {

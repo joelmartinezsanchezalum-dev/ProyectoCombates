@@ -7,7 +7,9 @@ const { MagoElfo } = require("./clases");
 const { GuerreroEnano } = require("./clases");
 const { ArqueroMedio } = require("./clases");
 
-// Menu principal 
+/**
+ * Procedimiento que muestra por pantalla las opciones del juego
+ */
 function mostrarMenu() {
     console.clear();
 
@@ -18,7 +20,9 @@ function mostrarMenu() {
     console.log("0. Salir\n");
 };
 
-// Mostrar personajes
+/**
+ * Procedimiento que muestra por pantalla las opciones de personajes que existen
+ */
 function mostrarPersonajes() {
     console.clear();
 
@@ -29,41 +33,47 @@ function mostrarPersonajes() {
     console.log("4- Arquero Mediano\n");
 };
 
+/**
+ * Procedimiento que lee el archivo de estadisticas.csv y muestra por pantalla las
+ * estadisticas en una interfaz
+ */
 function mostrarEstadisticas() {
     if (!fs.existsSync("./estadisticas.csv")) {
         fs.writeFileSync("./estadisticas.csv", "PERSONAJE;VICTORIAS;DERROTAS;PARTIDAS_JUGADAS\nPaladin;0;0;0\nGuerreroEnano;0;0;0\nMagoElfo;0;0;0\nArqueroMedio;0;0;0")
-    } 
+    }
     let buffer = fs.readFileSync("./estadisticas.csv");
     let informacion = buffer.toString().split("\n");
     for (let i = 0; i < 5; i++) {
         informacion[i] = informacion[i].split(";");
     }
-    console.log("╔═══════════════╦═══════════════════════╦═══════════════════════╦═══════════════════════╗")
-    console.log("║ "+informacion[0][0]+"\t║\t"+informacion[0][1]+"\t║\t"+informacion[0][2]+"\t║    "+informacion[0][3]+"\t║")
-    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
-    console.log("║ "+informacion[1][0]+"\t║\t    "+informacion[1][1]+"\t\t║\t   "+informacion[1][2]+"\t\t║            "+informacion[1][3]+"\t\t║")
-    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
-    console.log("║ "+informacion[2][0]+"\t║\t    "+informacion[2][1]+"\t\t║\t   "+informacion[2][2]+"\t\t║            "+informacion[2][3]+"\t\t║")
-    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")    
-    console.log("║ "+informacion[3][0]+"\t║\t    "+informacion[3][1]+"\t\t║\t   "+informacion[3][2]+"\t\t║            "+informacion[3][3]+"\t\t║")
-    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")    
-    console.log("║ "+informacion[4][0]+"\t║\t    "+informacion[4][1]+"\t\t║\t   "+informacion[4][2]+"\t\t║            "+informacion[4][3]+"\t\t║")
-    console.log("╚═══════════════╩═══════════════════════╩═══════════════════════╩═══════════════════════╝")
+    console.log("╔═══════════════╦═══════════════════════╦═══════════════════════╦═══════════════════════╗");
+    console.log("║ " + informacion[0][0] + "\t║\t" + informacion[0][1] + "\t║\t" + informacion[0][2] + "\t║    " + informacion[0][3] + "\t║")
+    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣");
+    console.log("║ " + informacion[1][0] + "\t║\t    " + informacion[1][1] + "\t\t║\t   " + informacion[1][2] + "\t\t║            " + informacion[1][3] + "\t\t║")
+    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣");
+    console.log("║ " + informacion[2][0] + "\t║\t    " + informacion[2][1] + "\t\t║\t   " + informacion[2][2] + "\t\t║            " + informacion[2][3] + "\t\t║")
+    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣");
+    console.log("║ " + informacion[3][0] + "\t║\t    " + informacion[3][1] + "\t\t║\t   " + informacion[3][2] + "\t\t║            " + informacion[3][3] + "\t\t║")
+    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣");
+    console.log("║ " + informacion[4][0] + "\t║\t    " + informacion[4][1] + "\t\t║\t   " + informacion[4][2] + "\t\t║            " + informacion[4][3] + "\t\t║")
+    console.log("╚═══════════════╩═══════════════════════╩═══════════════════════╩═══════════════════════╝");
 }
+
 
 function modificarEstadisticas(personaje, resultado) {
     let buffer = fs.readFileSync("./estadisticas.csv");
     let informacion = buffer.toString().split("\n");
     for (let i = 0; i < 5; i++) {
         informacion[i] = informacion[i].split(";");
-    }
+    };
     asignacion(personaje, informacion, resultado)
     for (let i = 0; i < 5; i++) {
         informacion[i] = informacion[i].join(";");
-    }
-    informacion = informacion.join("\n")
+    };
+    informacion = informacion.join("\n");
     fs.writeFileSync("./estadisticas.csv", informacion);
-}
+};
+
 
 function asignacion(personaje, informacion, resultado) {
     let victoria = 0;
@@ -78,7 +88,7 @@ function asignacion(personaje, informacion, resultado) {
         index = 3;
     } else if (personaje == "ArqueroMedio") {
         index = 4;
-    }
+    };
     victoria = informacion[index][1];
     derrota = informacion[index][2];
     partidas_jugadas = informacion[index][3];
@@ -86,12 +96,12 @@ function asignacion(personaje, informacion, resultado) {
         victoria = Number(victoria) + 1;
     } else {
         derrota = Number(derrota) + 1;
-    }
+    };
     partidas_jugadas = Number(partidas_jugadas) + 1;
     informacion[index][1] = victoria;
     informacion[index][2] = derrota;
     informacion[index][3] = partidas_jugadas;
-}
+};
 
 let opcion;
 let opcionPersonaje;
