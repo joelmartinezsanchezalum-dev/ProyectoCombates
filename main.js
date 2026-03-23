@@ -124,20 +124,21 @@ do {
                 break;
 
             case "3":
-                if (typeof(personaje) == undefined) return;
+                if (typeof (personaje) == undefined) return;
 
                 //Creamos el gestor, que nos pone un contrincante aleatorio
                 let gestor = new GestorCombate(personaje);
 
                 do {
                     //El gestor genera un turno de ataques (ataque aleatorio, ataca el más rápido primero)
-                    gestor.ataque();
+                    let historial = gestor.ataque();
+                    console.log(historial);
 
                     prompt("Presiona ENTER para continuar");
-                } while (!gestor.victoria);
-                
+                } while (!gestor.partidaAcabada);
+
                 resultado = gestor.checkWin();
-                crearEstadisticas(personaje, resultado);
+                modificarEstadisticas(personaje, resultado);
 
                 gestor.imprimirResultado(resultado);
                 prompt("Presiona ENTER para volver al menu");

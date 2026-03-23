@@ -4,16 +4,21 @@ const { GuerreroEnano } = require("./GuerreroEnano.js");
 const { ArqueroMedio } = require("./ArqueroMedio.js");
 
 class GestorCombate {
+    usuario
+    maquina
     jugadores
-
-    victoria
 
     rapido
 
-    constructor(j1) {
-        this.victoria = false;
+    partidaAcabada
 
-        this.jugadores = [j1, this.#generarPersonajeRandom()]
+    constructor(j1) {
+        this.partidaAcabada = false;
+
+        this.usuario = j1;
+        this.maquina = this.#generarPersonajeRandom();
+
+        this.jugadores = [this.usuario, this.maquina];
 
         this.rapido = this.#esJugadorMasRapido();
 
@@ -56,17 +61,42 @@ class GestorCombate {
 
     ataque() {
         let daño;
+        let historial = [];
+
         for (let x = 0; x < this.jugadores.length; x++) {
             if (!this.jugadores[Number(!x)].esquivar()) {
                 let numAtaque = Math.round(Math.random());
                 daño = numAtaque ? this.jugadores[Number(x)].ataque1() : this.jugadores[x].ataque2();
 
                 this.jugadores[Number(!x)].vida -= daño;
-                console.log(`${this.jugadores[x]} ha causado ${daño} de daño a ${this.jugadores[Number(!x)]}`);
+                historial.push(`${this.jugadores[x].namePersonaje} ha causado ${daño} de daño a ${this.jugadores[Number(!x)].namePersonaje}`);
+            } else {
+                historial.push(`${this.jugadores[Number(!x)].namePersonaje} ha esquivado el ataque de ${this.jugadores[Number(x)].namePersonaje}`);
             };
+            // Comprovamos si alguno de los dos jugadores ha muerto
         };
-        return;
+        (this.jugadores[0].vida == 0 || this.jugadores[1].vida == 0) ? this.partidaAcabada = true : this.partidaAcabada = false;
+
+        return historial;
+    };
+
+    checkWin() {
+        if (this.usuario.vida == 0 && this.maquina.vida >= 0) {
+            return false;
+        } else if (this.usuario.vida > 0 && this.maquina.vida == 0) {
+            return true;
+        };
+    };
+
+    imprimirResultado(resultado) {
+        if (resultado) {
+            console.log("¡Victoria!");
+            console.log(`El ${this.usuario} del jugador ha derrotado al ${this.maquina} enemigo.`);
+        } else {
+            console.log("Derrota...");
+            console.log(`El ${this.maquina} enemigo ha derrotado al ${this.usuario} del usuario.`);
+        }
     };
 };
 
-module.exports.GestorCombate = GestorCombate; 
+module.exports.GestorCombate = GestorCombate;
