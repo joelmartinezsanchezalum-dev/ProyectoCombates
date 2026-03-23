@@ -29,19 +29,29 @@ function mostrarPersonajes() {
     console.log("4- Arquero Mediano\n");
 };
 
-function verEstadisticas() {
+function mostrarEstadisticas() {
     if (!fs.existsSync("./estadisticas.csv")) {
         fs.writeFileSync("./estadisticas.csv", "PERSONAJE;VICTORIAS;DERROTAS;PARTIDAS_JUGADAS\nPaladin;0;0;0\nGuerreroEnano;0;0;0\nMagoElfo;0;0;0\nArqueroMedio;0;0;0")
-        verEstadisticas()
-    } else {
-        let buffer = fs.readFileSync("./estadisticas.csv")
-        let informacion = buffer.toString().split(/\r?\n/).join("\n")
-        console.log(informacion)
+    } 
+    let buffer = fs.readFileSync("./estadisticas.csv");
+    let informacion = buffer.toString().split("\n");
+    for (let i = 0; i < 5; i++) {
+        informacion[i] = informacion[i].split(";");
     }
+    console.log("╔═══════════════╦═══════════════════════╦═══════════════════════╦═══════════════════════╗")
+    console.log("║ "+informacion[0][0]+"\t║\t"+informacion[0][1]+"\t║\t"+informacion[0][2]+"\t║    "+informacion[0][3]+"\t║")
+    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
+    console.log("║ "+informacion[1][0]+"\t║\t    "+informacion[1][1]+"\t\t║\t   "+informacion[1][2]+"\t\t║            "+informacion[1][3]+"\t\t║")
+    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
+    console.log("║ "+informacion[2][0]+"\t║\t    "+informacion[2][1]+"\t\t║\t   "+informacion[2][2]+"\t\t║            "+informacion[2][3]+"\t\t║")
+    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")    
+    console.log("║ "+informacion[3][0]+"\t║\t    "+informacion[3][1]+"\t\t║\t   "+informacion[3][2]+"\t\t║            "+informacion[3][3]+"\t\t║")
+    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")    
+    console.log("║ "+informacion[4][0]+"\t║\t    "+informacion[4][1]+"\t\t║\t   "+informacion[4][2]+"\t\t║            "+informacion[4][3]+"\t\t║")
+    console.log("╚═══════════════╩═══════════════════════╩═══════════════════════╩═══════════════════════╝")
 }
 
-function crearEstadisticas(personaje, resultado) {
-    verEstadisticas()
+function modificarEstadisticas(personaje, resultado) {
     let buffer = fs.readFileSync("./estadisticas.csv");
     let informacion = buffer.toString().split("\n");
     for (let i = 0; i < 5; i++) {
@@ -119,7 +129,7 @@ do {
                 break;
 
             case "2":
-                verEstadisticas();
+                mostrarEstadisticas();
                 prompt("Presiona ENTER para continuar");
                 break;
 
