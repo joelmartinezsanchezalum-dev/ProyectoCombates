@@ -1,5 +1,5 @@
-PERSONAJE;NaN;NaN;NaN
-Paladin;5;0;5
-GuerreroEnano;10;0;0
-MagoElfo;0;10;0
-ArqueroMedio;0;0;10
+PERSONAJE;VICTORIAS;DERROTAS;PARTIDAS_JUGADAS
+Paladin Humano;1;6;7
+Guerrero Enano;0;0;0
+Mago Elfo;0;8;8
+Arquero Medio;0;25;25

@@ -31,32 +31,36 @@ function mostrarPersonajes() {
 
 function mostrarEstadisticas() {
     if (!fs.existsSync("./estadisticas.csv")) {
-        fs.writeFileSync("./estadisticas.csv", "PERSONAJE;VICTORIAS;DERROTAS;PARTIDAS_JUGADAS\nPaladin;0;0;0\nGuerreroEnano;0;0;0\nMagoElfo;0;0;0\nArqueroMedio;0;0;0")
-    } 
+        fs.writeFileSync("./estadisticas.csv", "PERSONAJE;VICTORIAS;DERROTAS;PARTIDAS_JUGADAS\nPaladin Humano;0;0;0\nGuerrero Enano;0;0;0\nMago Elfo;0;0;0\nArquero Medio;0;0;0")
+    }
     let buffer = fs.readFileSync("./estadisticas.csv");
     let informacion = buffer.toString().split("\n");
     for (let i = 0; i < 5; i++) {
         informacion[i] = informacion[i].split(";");
     }
     console.log("╔═══════════════╦═══════════════════════╦═══════════════════════╦═══════════════════════╗")
-    console.log("║ "+informacion[0][0]+"\t║\t"+informacion[0][1]+"\t║\t"+informacion[0][2]+"\t║    "+informacion[0][3]+"\t║")
+    console.log("║ " + informacion[0][0] + "\t║\t" + informacion[0][1] + "\t║\t" + informacion[0][2] + "\t║    " + informacion[0][3] + "\t║")
     console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
-    console.log("║ "+informacion[1][0]+"\t║\t    "+informacion[1][1]+"\t\t║\t   "+informacion[1][2]+"\t\t║            "+informacion[1][3]+"\t\t║")
+    console.log("║ " + informacion[1][0] + "\t║\t    " + informacion[1][1] + "\t\t║\t   " + informacion[1][2] + "\t\t║            " + informacion[1][3] + "\t\t║")
     console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
-    console.log("║ "+informacion[2][0]+"\t║\t    "+informacion[2][1]+"\t\t║\t   "+informacion[2][2]+"\t\t║            "+informacion[2][3]+"\t\t║")
-    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")    
-    console.log("║ "+informacion[3][0]+"\t║\t    "+informacion[3][1]+"\t\t║\t   "+informacion[3][2]+"\t\t║            "+informacion[3][3]+"\t\t║")
-    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")    
-    console.log("║ "+informacion[4][0]+"\t║\t    "+informacion[4][1]+"\t\t║\t   "+informacion[4][2]+"\t\t║            "+informacion[4][3]+"\t\t║")
+    console.log("║ " + informacion[2][0] + "\t║\t    " + informacion[2][1] + "\t\t║\t   " + informacion[2][2] + "\t\t║            " + informacion[2][3] + "\t\t║")
+    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
+    console.log("║ " + informacion[3][0] + "\t║\t    " + informacion[3][1] + "\t\t║\t   " + informacion[3][2] + "\t\t║            " + informacion[3][3] + "\t\t║")
+    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
+    console.log("║ " + informacion[4][0] + "\t║\t    " + informacion[4][1] + "\t\t║\t   " + informacion[4][2] + "\t\t║            " + informacion[4][3] + "\t\t║")
     console.log("╚═══════════════╩═══════════════════════╩═══════════════════════╩═══════════════════════╝")
 }
 
 function modificarEstadisticas(personaje, resultado) {
+    if (!fs.existsSync("./estadisticas.csv")) {
+        fs.writeFileSync("./estadisticas.csv", "PERSONAJE;VICTORIAS;DERROTAS;PARTIDAS_JUGADAS\nPaladin Humano;0;0;0\nGuerrero Enano;0;0;0\nMago Elfo;0;0;0\nArquero Medio;0;0;0")
+    }
     let buffer = fs.readFileSync("./estadisticas.csv");
     let informacion = buffer.toString().split("\n");
     for (let i = 0; i < 5; i++) {
         informacion[i] = informacion[i].split(";");
     }
+    
     asignacion(personaje, informacion, resultado)
     for (let i = 0; i < 5; i++) {
         informacion[i] = informacion[i].join(";");
@@ -66,17 +70,17 @@ function modificarEstadisticas(personaje, resultado) {
 }
 
 function asignacion(personaje, informacion, resultado) {
-    let victoria = 0;
-    let derrota = 0;
-    let partidas_jugadas = 0;
-    let index = 0;
-    if (personaje == "Paladin") {
+    let victoria;
+    let derrota;
+    let partidas_jugadas;
+    let index;
+    if (personaje.namePersonaje == "Paladin Humano") {
         index = 1;
-    } else if (personaje == "GuerreroEnano") {
+    } else if (personaje.namePersonaje == "Guerrero Enano") {
         index = 2;
-    } else if (personaje == "MagoElfo") {
+    } else if (personaje.namePersonaje == "Mago Elfo") {
         index = 3;
-    } else if (personaje == "ArqueroMedio") {
+    } else if (personaje.namePersonaje == "Arquero Medio") {
         index = 4;
     }
     victoria = informacion[index][1];
@@ -134,7 +138,10 @@ do {
                 break;
 
             case "3":
-                if (typeof (personaje) == undefined) return;
+                if (typeof (personaje) == 'undefined') {
+                    prompt("Crea un personaje primero")
+                    break;
+                }
 
                 //Creamos el gestor, que nos pone un contrincante aleatorio
                 let gestor = new GestorCombate(personaje);
@@ -142,9 +149,11 @@ do {
                 do {
                     //El gestor genera un turno de ataques (ataque aleatorio, ataca el más rápido primero)
                     let historial = gestor.ataque();
-                    console.log(historial);
-
+                    for (let i = 0; i < historial.length; i++) {
+                        console.log(historial[i]);
+                    }
                     prompt("Presiona ENTER para continuar");
+                    console.clear();
                 } while (!gestor.partidaAcabada);
 
                 resultado = gestor.checkWin();

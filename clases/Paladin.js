@@ -10,7 +10,7 @@ class Paladin extends Personaje {
     constructor() {
         super();
 
-        this.#namePersonaje = "Paladin humano";
+        this.#namePersonaje = "Paladin Humano";
 
         this.vida = 75;
         this.poder = 25;
