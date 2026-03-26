@@ -155,14 +155,14 @@ do {
                     prompt("Presiona ENTER para continuar");
                     console.clear();
                 } while (!gestor.partidaAcabada);
-                gestor.restaurarSalud();
-
+                
                 resultado = gestor.checkWin();
                 modificarEstadisticas(personaje, resultado);
-
+                
                 gestor.imprimirResultado(resultado);
                 prompt("Presiona ENTER para volver al menu");
-
+                
+                gestor.restaurarSalud();
                 break;
 
             case "0":
