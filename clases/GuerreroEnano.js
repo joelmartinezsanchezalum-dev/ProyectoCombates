@@ -2,6 +2,10 @@ const { Personaje } = require("./Personaje");
 
 class GuerreroEnano extends Personaje {
 
+<<<<<<< HEAD
+=======
+    MAX_VIDA;
+>>>>>>> adri
     #namePersonaje;
 
     static nameAtaque1 = "Recuperar Aliento";
@@ -9,11 +13,20 @@ class GuerreroEnano extends Personaje {
     constructor() {
         super();
 
+<<<<<<< HEAD
         this.#namePersonaje = "Guerrero Enano";
 
         this.vida = 90;
+=======
+        this.MAX_VIDA = 90;
+
+        this.#namePersonaje = "Guerrero Enano";
+
+        this.vida = this.MAX_VIDA;
+>>>>>>> adri
         this.poder = 20;
         this.velocidad = 5;
+
     }
 
     get namePersonaje() {
