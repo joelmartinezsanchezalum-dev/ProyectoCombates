@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "clases": "file:clases",
     "prompt-sync": "^4.2.0"
   }
 }

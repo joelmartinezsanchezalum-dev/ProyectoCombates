@@ -1,5 +1,6 @@
 class Personaje {
 
+    MAX_VIDA
     #vida
     #poder
     #velocidad
@@ -7,7 +8,8 @@ class Personaje {
     #nameAtaque1
     #nameAtaque2
 
-    constructor() { }
+
+    constructor() {}
 
     get vida() {
         return this.#vida;
@@ -30,7 +32,8 @@ class Personaje {
     };
 
     set vida(vida) {
-        this.#vida = vida;
+        this.#vida = Math.min(vida, this.MAX_VIDA);
+        this.#vida = Math.max(this.#vida, 0);
     }
 
     set poder(poder) {
@@ -49,14 +52,14 @@ class Personaje {
         this.#nameAtaque2 = nameAtaque2;
     }
 
-    ataque1() { }
-    ataque2() { }
+    ataque1() { };
+    ataque2() { };
 
     esquivar() {
-        let dodge = (Math.random() * 100)
-        dodge = (dodge <= this.velocidad)
+        let dodge = (Math.random() * 100);
+        dodge = (dodge <= this.velocidad);
         return dodge;
-    }
-}
+    };
+};
 
 module.exports.Personaje = Personaje;
