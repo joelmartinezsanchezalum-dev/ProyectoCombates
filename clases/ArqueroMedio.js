@@ -1,7 +1,7 @@
 const { Personaje } = require("./Personaje.js");
 
 class ArqueroMedio extends Personaje {
-    #namePersonaje;
+    #namePersonaje
 
     static nameAtaque1 = "Tiro preciso";
     static nameAtaque1 = "Tiro multiple";
@@ -18,7 +18,7 @@ class ArqueroMedio extends Personaje {
 
     get namePersonaje() {
         return this.#namePersonaje;
-    };
+    }
 
     ataque1() {
         return this.poder;
@@ -27,7 +27,7 @@ class ArqueroMedio extends Personaje {
     ataque2() {
         const veces = Math.floor((Math.random()) * 3) + 1;
         return (this.poder * 0.5) * veces;
-    };
+    }
 };
 
 module.exports.ArqueroMedio = ArqueroMedio;
