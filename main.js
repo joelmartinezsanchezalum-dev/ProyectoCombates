@@ -45,18 +45,18 @@ function mostrarEstadisticas() {
     let informacion = buffer.toString().split("\n");
     for (let i = 0; i < 5; i++) {
         informacion[i] = informacion[i].split(";");
-    }
-    console.log("╔═══════════════╦═══════════════════════╦═══════════════════════╦═══════════════════════╗")
-    console.log("║ " + informacion[0][0] + "\t║\t" + informacion[0][1] + "\t║\t" + informacion[0][2] + "\t║    " + informacion[0][3] + "\t║")
-    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
-    console.log("║ " + informacion[1][0] + "\t║\t    " + informacion[1][1] + "\t\t║\t   " + informacion[1][2] + "\t\t║            " + informacion[1][3] + "\t\t║")
-    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
-    console.log("║ " + informacion[2][0] + "\t║\t    " + informacion[2][1] + "\t\t║\t   " + informacion[2][2] + "\t\t║            " + informacion[2][3] + "\t\t║")
-    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
-    console.log("║ " + informacion[3][0] + "\t║\t    " + informacion[3][1] + "\t\t║\t   " + informacion[3][2] + "\t\t║            " + informacion[3][3] + "\t\t║")
-    console.log("╠═══════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
-    console.log("║ " + informacion[4][0] + "\t║\t    " + informacion[4][1] + "\t\t║\t   " + informacion[4][2] + "\t\t║            " + informacion[4][3] + "\t\t║")
-    console.log("╚═══════════════╩═══════════════════════╩═══════════════════════╩═══════════════════════╝")
+        }
+    console.log("╔═════════════════╦═══════════════════════╦═══════════════════════╦═══════════════════════╗")
+    console.log("║ " + informacion[0][0] + "       ║\t"    + informacion[0][1] + "\t  ║\t   " + informacion[0][2] + "\t  ║    " + informacion[0][3] + "\t  ║")
+    console.log("╠═════════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
+    console.log("║ " + informacion[1][0] + "  ║\t    " + informacion[1][1] + "\t\t  ║\t    " + informacion[1][2] + "\t\t  ║            " + informacion[1][3] + "\t  ║")
+    console.log("╠═════════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
+    console.log("║ " + informacion[2][0] + "  ║\t    " + informacion[2][1] + "\t\t  ║\t    " + informacion[2][2] + "\t\t  ║            " + informacion[2][3] + "\t  ║")
+    console.log("╠═════════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
+    console.log("║ " + informacion[3][0] + "       ║\t    " + informacion[3][1] + "\t\t  ║\t    " + informacion[3][2] + "\t\t  ║            " + informacion[3][3] + "\t  ║")
+    console.log("╠═════════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
+    console.log("║ " + informacion[4][0] + "   ║\t    " + informacion[4][1] + "\t\t  ║\t    " + informacion[4][2] + "\t\t  ║            " + informacion[4][3] + "\t  ║")
+    console.log("╚═════════════════╩═══════════════════════╩═══════════════════════╩═══════════════════════╝")
 }
 
 
