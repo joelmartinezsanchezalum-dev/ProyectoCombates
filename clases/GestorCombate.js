@@ -69,7 +69,7 @@ class GestorCombate {
                 daño = numAtaque ? this.jugadores[Number(x)].ataque1() : this.jugadores[x].ataque2();
 
                 this.jugadores[Number(!x)].vida -= daño;
-                if (daño == 0){
+                if (daño == 0) {
                     historial.push(`${this.jugadores[x].namePersonaje} ha recuperado ${this.jugadores[x].poder * 1.5} de vida`);
                     continue;
                 }
@@ -101,6 +101,10 @@ class GestorCombate {
             console.log(`El ${this.maquina.namePersonaje} enemigo ha derrotado al ${this.usuario.namePersonaje} del usuario.`);
         }
     };
+
+    recuperarVida() {
+        this.usuario.vida = this.usuario.MAX_VIDA;
+    }
 };
 
 module.exports.GestorCombate = GestorCombate;
