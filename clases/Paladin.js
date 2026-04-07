@@ -2,6 +2,7 @@ const { Personaje } = require("./Personaje.js");
 
 class Paladin extends Personaje {
 
+    MAX_VIDA;
     #namePersonaje;
 
     static nameAtaque1 = "Ataque Divino";
@@ -9,12 +10,18 @@ class Paladin extends Personaje {
 
     constructor() {
         super();
+        this.MAX_VIDA = 75;
 
         this.#namePersonaje = "Paladin Humano";
 
-        this.vida = 75;
+        this.vida = this.MAX_VIDA;
         this.poder = 25;
         this.velocidad = 10;
+
+    }
+
+    get namePersonaje() {
+        return this.#namePersonaje;
     }
 
     get namePersonaje() {

@@ -102,7 +102,13 @@ class GestorCombate {
         }
     };
 
-    recuperarVida() {
+    mostrarSalud(){
+        console.log(`Jugador: ${this.usuario.vida}`);
+        console.log(`Enemigo: ${this.maquina.vida}`);
+
+    }
+
+    restaurarSalud(){
         this.usuario.vida = this.usuario.MAX_VIDA;
     }
 };

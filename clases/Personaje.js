@@ -1,5 +1,6 @@
 class Personaje {
 
+    MAX_VIDA
     #vida
     #poder
     #velocidad
@@ -7,7 +8,8 @@ class Personaje {
     #nameAtaque1
     #nameAtaque2
 
-    constructor() { }
+
+    constructor() {}
 
     get vida() {
         return this.#vida;
@@ -30,8 +32,8 @@ class Personaje {
     };
 
     set vida(vida) {
-        this.#vida = Math.min(vida, this.#vida);
-        this.#vida = Math.max(vida, 0);
+        this.#vida = Math.min(vida, this.MAX_VIDA);
+        this.#vida = Math.max(this.#vida, 0);
     }
 
     set poder(poder) {
