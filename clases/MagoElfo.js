@@ -10,11 +10,18 @@ class MagoElfo extends Personaje {
     constructor() {
         super();
 
+        this.MAX_VIDA = 40;
+        
         this.#namePersonaje = "Mago Elfo";
 
-        this.vida = 40;
+        this.vida = this.MAX_VIDA;
         this.poder = 45;
         this.velocidad = 15;
+
+    }
+
+    get namePersonaje() {
+        return this.#namePersonaje;
     }
 
     get namePersonaje() {

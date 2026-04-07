@@ -129,7 +129,6 @@ do {
                         personaje = new ArqueroMedio();
                         break;
                 }
-
                 break;
 
             case "2":
@@ -152,22 +151,28 @@ do {
                     for (let i = 0; i < historial.length; i++) {
                         console.log(historial[i]);
                     }
+                    gestor.mostrarSalud();
                     prompt("Presiona ENTER para continuar");
                     console.clear();
                 } while (!gestor.partidaAcabada);
-
+                
                 resultado = gestor.checkWin();
                 modificarEstadisticas(personaje, resultado);
-
+                
                 gestor.imprimirResultado(resultado);
                 prompt("Presiona ENTER para volver al menu");
-
+                
+                gestor.restaurarSalud();
                 break;
 
             case "0":
                 prompt("Saliendo...");
                 break;
+
+            default:
+                prompt("Opción incorrecta. Pulsa ENTER para continuar...");
+                break;
         }
 
     }
-} while (opcion != 0);
+} while (opcion !== '0');

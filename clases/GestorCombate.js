@@ -101,6 +101,16 @@ class GestorCombate {
             console.log(`El ${this.maquina.namePersonaje} enemigo ha derrotado al ${this.usuario.namePersonaje} del usuario.`);
         }
     };
+
+    mostrarSalud(){
+        console.log(`Jugador: ${this.usuario.vida}`);
+        console.log(`Enemigo: ${this.maquina.vida}`);
+
+    }
+
+    restaurarSalud(){
+        this.usuario.vida = this.usuario.MAX_VIDA;
+    }
 };
 
 module.exports.GestorCombate = GestorCombate;

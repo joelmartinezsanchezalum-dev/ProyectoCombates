@@ -1,5 +1,12 @@
 PERSONAJE;VICTORIAS;DERROTAS;PARTIDAS_JUGADAS
+<<<<<<< HEAD
 Paladin Humano;1;6;7
 Guerrero Enano;0;0;0
 Mago Elfo;0;8;8
 Arquero Medio;0;25;25
+=======
+Paladin Humano;13;18;31
+Guerrero Enano;6;1;7
+Mago Elfo;6;41;47
+Arquero Medio;9;27;36
+>>>>>>> adri
