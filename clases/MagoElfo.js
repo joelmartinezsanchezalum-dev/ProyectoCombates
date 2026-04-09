@@ -1,4 +1,5 @@
 const { Personaje } = require("./Personaje");
+const fs = require("fs");
 
 class MagoElfo extends Personaje {
 
@@ -11,7 +12,7 @@ class MagoElfo extends Personaje {
         super();
 
         this.MAX_VIDA = 40;
-        
+
         this.#namePersonaje = "Mago Elfo";
 
         this.vida = this.MAX_VIDA;
@@ -35,6 +36,12 @@ class MagoElfo extends Personaje {
         let repeticiones = Math.random() * 3 + 3
         return (((this.poder * 0.2) * (Math.round(repeticiones))))
     }
+
+    arteAscii() {
+        const buffer = fs.readFileSync("./arteAscii/mago.js");
+        let contenido = buffer.toString().split("\n");
+        return contenido;
+    };
 
 };
 

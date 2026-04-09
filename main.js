@@ -37,9 +37,9 @@ function mostrarEstadisticas() {
     let informacion = buffer.toString().split("\n");
     for (let i = 0; i < 5; i++) {
         informacion[i] = informacion[i].split(";");
-        }
+    }
     console.log("╔═════════════════╦═══════════════════════╦═══════════════════════╦═══════════════════════╗")
-    console.log("║ " + informacion[0][0] + "       ║\t"    + informacion[0][1] + "\t  ║\t   " + informacion[0][2] + "\t  ║    " + informacion[0][3] + "\t  ║")
+    console.log("║ " + informacion[0][0] + "       ║\t" + informacion[0][1] + "\t  ║\t   " + informacion[0][2] + "\t  ║    " + informacion[0][3] + "\t  ║")
     console.log("╠═════════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
     console.log("║ " + informacion[1][0] + "  ║\t    " + informacion[1][1] + "\t\t  ║\t    " + informacion[1][2] + "\t\t  ║            " + informacion[1][3] + "\t  ║")
     console.log("╠═════════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
@@ -60,7 +60,7 @@ function modificarEstadisticas(personaje, resultado) {
     for (let i = 0; i < 5; i++) {
         informacion[i] = informacion[i].split(";");
     }
-    
+
     asignacion(personaje, informacion, resultado)
     for (let i = 0; i < 5; i++) {
         informacion[i] = informacion[i].join(";");
@@ -147,6 +147,7 @@ do {
 
                 do {
                     //El gestor genera un turno de ataques (ataque aleatorio, ataca el más rápido primero)
+                    gestor.mostrarPersonajes();
                     let historial = gestor.ataque();
                     for (let i = 0; i < historial.length; i++) {
                         console.log(historial[i]);
@@ -156,12 +157,13 @@ do {
                     console.clear();
                 } while (!gestor.partidaAcabada);
                 
+                gestor.mostrarPersonajes();
                 resultado = gestor.checkWin();
                 modificarEstadisticas(personaje, resultado);
-                
+
                 gestor.imprimirResultado(resultado);
                 prompt("Presiona ENTER para volver al menu");
-                
+
                 gestor.restaurarSalud();
                 break;
 

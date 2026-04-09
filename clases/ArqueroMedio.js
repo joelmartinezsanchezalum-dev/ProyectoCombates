@@ -1,8 +1,9 @@
 const { Personaje } = require("./Personaje.js");
+const fs = require("fs");
 
 class ArqueroMedio extends Personaje {
-    
-    MAX_VIDA; 
+
+    MAX_VIDA;
     #namePersonaje
 
     static nameAtaque1 = "Tiro preciso";
@@ -31,6 +32,19 @@ class ArqueroMedio extends Personaje {
     ataque2() {
         const veces = Math.floor((Math.random()) * 3) + 1;
         return (this.poder * 0.5) * veces;
+    }
+
+    arteAscii(jugador) {
+        let buffer;
+
+        if (jugador) {
+            buffer = fs.readFileSync("./arteAscii/arqueroDr.js");
+        } else {
+            buffer = fs.readFileSync("./arteAscii/arqueroIz.js");
+        };
+
+        let contenido = buffer.toString().split("\n");
+        return contenido;
     }
 };
 

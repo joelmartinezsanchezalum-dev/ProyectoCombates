@@ -1,4 +1,5 @@
 const { Personaje } = require("./Personaje");
+const fs = require("fs");
 
 class GuerreroEnano extends Personaje {
 
@@ -31,6 +32,12 @@ class GuerreroEnano extends Personaje {
     ataque2() {
         return (this.poder);
     }
+
+    arteAscii() {
+        const buffer = fs.readFileSync("./arteAscii/guerrero.js");
+        let contenido = buffer.toString().split("\n");
+        return contenido;
+    };
 }
 
 module.exports.GuerreroEnano = GuerreroEnano;

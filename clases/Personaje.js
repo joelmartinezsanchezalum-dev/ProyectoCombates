@@ -8,8 +8,7 @@ class Personaje {
     #nameAtaque1
     #nameAtaque2
 
-
-    constructor() {}
+    constructor() { }
 
     get vida() {
         return this.#vida;
@@ -54,6 +53,8 @@ class Personaje {
 
     ataque1() { };
     ataque2() { };
+
+    arteAscii() { };
 
     esquivar() {
         let dodge = (Math.random() * 100);
