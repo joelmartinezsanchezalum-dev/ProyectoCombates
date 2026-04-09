@@ -32,7 +32,7 @@ class GestorCombate {
      * @returns Un personaje random de una de las 4 clases;
      */
     #generarPersonajeRandom() {
-        let tipo = Math.floor(Math.random() * 3);
+        let tipo = Math.floor(Math.random() * 4);
         let personaje;
         switch (tipo) {
             case 0:
@@ -69,7 +69,7 @@ class GestorCombate {
                 daño = numAtaque ? this.jugadores[Number(x)].ataque1() : this.jugadores[x].ataque2();
 
                 this.jugadores[Number(!x)].vida -= daño;
-                if (daño == 0){
+                if (daño == 0) {
                     historial.push(`${this.jugadores[x].namePersonaje} ha recuperado ${this.jugadores[x].poder * 1.5} de vida`);
                     continue;
                 }
@@ -102,15 +102,29 @@ class GestorCombate {
         }
     };
 
-    mostrarSalud(){
+    mostrarSalud() {
         console.log(`Jugador: ${this.usuario.vida}`);
         console.log(`Enemigo: ${this.maquina.vida}`);
 
     }
 
-    restaurarSalud(){
+    restaurarSalud() {
         this.usuario.vida = this.usuario.MAX_VIDA;
-    }
+    };
+
+    mostrarPersonajes() {
+        const personajeUsuario = this.usuario.arteAscii(true);
+        const personajeMaquina = this.maquina.arteAscii(false);
+
+        let linea = "";
+
+        for (let x = 0; x < personajeMaquina.length; x++) {
+
+            linea = (personajeUsuario[x].slice(13, -4) + "            " + personajeMaquina[x].slice(13, -4));
+            console.log(linea);
+        };
+        console.log("");
+    };
 };
 
 module.exports.GestorCombate = GestorCombate;
