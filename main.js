@@ -66,9 +66,7 @@ function mostrarEstadisticas() {
     let informacion = buffer.toString().split("\n");
     for (let i = 0; i < 5; i++) {
         informacion[i] = informacion[i].split(";");
-    }
-    console.log(informacion[0][0]);
-    
+    }    
     console.log("╔═════════════════╦═══════════════════════╦═══════════════════════╦═══════════════════════╗")
     console.log("║ " + informacion[0][0] + "       ║\t" + informacion[0][1] + "\t  ║\t   " + informacion[0][2] + "\t  ║    " + informacion[0][3] + "\t  ║")
     console.log("╠═════════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
