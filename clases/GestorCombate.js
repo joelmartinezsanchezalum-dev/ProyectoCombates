@@ -12,6 +12,14 @@ class GestorCombate {
 
     partidaAcabada
 
+    /**
+     * @param {Boolean} partidaAcabada Estado partida
+     * @param {Paladin | ArqueroMedio | GuerreroEnano | MagoElfo} j1 Personaje elegido por el usuario
+     * @param {Paladin | ArqueroMedio | GuerreroEnano | MagoElfo} maquina Personaje elegido por la maquina 
+     * @param {Paladin | ArqueroMedio | GuerreroEnano | MagoElfo} maquina Personaje elegido por laBoolean 
+     * @param {Array} jugadores Los dos jugadores, el indice[0] sera el jugador mas rapido
+     * @param {Boolean} rapido Estado para saber si el usuario es mas rapido que la maquina
+     */
     constructor(j1) {
         this.partidaAcabada = false;
 
@@ -51,6 +59,9 @@ class GestorCombate {
         return personaje;
     };
 
+    /**
+     * @returns {Boolean} Devuelve True si el personaje del usuario es mas rapido que el personaje de la maquina
+     */
     #esJugadorMasRapido() {
         if (this.jugadores[0].velocidad > this.jugadores[1].velocidad) {
             return true;
@@ -59,6 +70,14 @@ class GestorCombate {
         };
     };
 
+    /**
+     * Funcion en la cual se realiza una ronda, en la que los dos jugadores atacan, en el caso de que
+     * el contricante no haya esquoivado.
+     * 
+     * Y comprovamos si alguno de los dos jugadores no han muerto.
+     * 
+     * @returns {Array} Devuelve una lista de movimientos de los dos jugadores en una ronda completa 
+     */
     ataque() {
         let daño;
         let historial = [];
@@ -84,6 +103,10 @@ class GestorCombate {
         return historial;
     };
 
+    /**
+     * 
+     * @returns {boolean} Comprovamos el personaje del usuario a ganado
+     */
     checkWin() {
         if (this.usuario.vida == 0 && this.maquina.vida >= 0) {
             return false;
@@ -92,6 +115,9 @@ class GestorCombate {
         };
     };
 
+    /**
+     * Procedimiento para mostrar un texto al usuario de quien ha ganado la partida
+     */
     imprimirResultado(resultado) {
         if (resultado) {
             console.log("¡Victoria!");
@@ -102,16 +128,25 @@ class GestorCombate {
         }
     };
 
+    /**
+     * Procedimiento para mostrar la vida de los personajes
+     */
     mostrarSalud() {
         console.log(`Jugador: ${this.usuario.vida}`);
         console.log(`Enemigo: ${this.maquina.vida}`);
 
     }
 
+    /**
+     * Procedimiento para restaurar la vida del usuario
+     */
     restaurarSalud() {
         this.usuario.vida = this.usuario.MAX_VIDA;
     };
 
+    /**
+     * Procedimiento para mostrar los personajes en imagen ascoii
+    */
     mostrarPersonajes() {
         const personajeUsuario = this.usuario.arteAscii(true);
         const personajeMaquina = this.maquina.arteAscii(false);

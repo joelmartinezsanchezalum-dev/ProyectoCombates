@@ -56,6 +56,9 @@ class Personaje {
 
     arteAscii() { };
 
+    /**
+     * @returns {Boolean} dodge Devuelve True si el personaje a esquivado el ataque
+     */
     esquivar() {
         let dodge = (Math.random() * 100);
         dodge = (dodge <= this.velocidad);

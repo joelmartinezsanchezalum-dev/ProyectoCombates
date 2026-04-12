@@ -7,7 +7,9 @@ const { MagoElfo } = require("./clases");
 const { GuerreroEnano } = require("./clases");
 const { ArqueroMedio } = require("./clases");
 
-// Menu principal 
+/*
+ * Procedimiento para mostrar el menu
+ */
 function mostrarMenu() {
     console.clear();
 
@@ -18,7 +20,9 @@ function mostrarMenu() {
     console.log("0. Salir\n");
 };
 
-// Mostrar personajes
+/**
+ * Procedimiento para mostar los personajes a elegir
+ */
 function mostrarPersonajes() {
     console.clear();
 
@@ -29,6 +33,9 @@ function mostrarPersonajes() {
     console.log("4- Arquero Mediano\n");
 };
 
+/**
+ * Procedimiento para mostrar las estadisticas de los personajes del usuario
+ */
 function mostrarEstadisticas() {
     if (!fs.existsSync("./estadisticas.csv")) {
         fs.writeFileSync("./estadisticas.csv", "PERSONAJE;VICTORIAS;DERROTAS;PARTIDAS_JUGADAS\nPaladin Humano;0;0;0\nGuerrero Enano;0;0;0\nMago Elfo;0;0;0\nArquero Medio;0;0;0")
@@ -51,6 +58,14 @@ function mostrarEstadisticas() {
     console.log("╚═════════════════╩═══════════════════════╩═══════════════════════╩═══════════════════════╝")
 }
 
+/**
+ * Procedimiento para modificar las estadisticas
+ * 
+ * Creamos el archivo para guardar las estadisticas si no existiera
+ * 
+ * @param {Paladin | ArqueroMedio | GuerreroEnano | MagoElfo} personaje Personaje que ha elegido el usuario
+ * @param {Boolean} resultado True si el usuario a ganado 
+ */
 function modificarEstadisticas(personaje, resultado) {
     if (!fs.existsSync("./estadisticas.csv")) {
         fs.writeFileSync("./estadisticas.csv", "PERSONAJE;VICTORIAS;DERROTAS;PARTIDAS_JUGADAS\nPaladin Humano;0;0;0\nGuerrero Enano;0;0;0\nMago Elfo;0;0;0\nArquero Medio;0;0;0")
@@ -69,6 +84,13 @@ function modificarEstadisticas(personaje, resultado) {
     fs.writeFileSync("./estadisticas.csv", informacion);
 }
 
+/**
+ * Procedimiento para sumar la ultima partida al archivo de estadisticas
+ * 
+ * @param {Paladin | ArqueroMedio | GuerreroEnano | MagoElfo} personaje Personaje que ha elegido el usuario * 
+ * @param {String} informacion contenido del archivo de estadisticas 
+ * @param {Boolean} resultado True si el usuario a ganado
+ */
 function asignacion(personaje, informacion, resultado) {
     let victoria;
     let derrota;
@@ -156,7 +178,7 @@ do {
                     prompt("Presiona ENTER para continuar");
                     console.clear();
                 } while (!gestor.partidaAcabada);
-                
+
                 gestor.mostrarPersonajes();
                 resultado = gestor.checkWin();
                 modificarEstadisticas(personaje, resultado);
