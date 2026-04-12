@@ -3,24 +3,20 @@ const fs = require("fs");
 
 class MagoElfo extends Personaje {
 
-    #namePersonaje;
-
+    static namePersonaje = "Mago Elfo";
     static nameAtaque1 = "Bola de fuego";
-    static nameAtaque1 = "Electrocutar";
+    static nameAtaque2 = "Electrocutar";
 
     /**
      * @param {Number} MAX_VIDA Vida maxima del personaje
      * @param {Number} vide Vida actual del personaje
      * @param {Number} poder Poder del personaje
      * @param {Number} velocidad Velocidad del personaje
-     * @param {String} namePersonaje Nombre del personaje
      */
     constructor() {
         super();
 
         this.MAX_VIDA = 40;
-
-        this.#namePersonaje = "Mago Elfo";
 
         this.vida = this.MAX_VIDA;
         this.poder = 45;
@@ -34,7 +30,7 @@ class MagoElfo extends Personaje {
      * @returns {String} 
      */
     get namePersonaje() {
-        return this.#namePersonaje;
+        return this.constructor.namePersonaje;
     }
 
     /**

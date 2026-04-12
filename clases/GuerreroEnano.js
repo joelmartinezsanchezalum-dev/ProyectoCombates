@@ -4,24 +4,21 @@ const fs = require("fs");
 class GuerreroEnano extends Personaje {
 
     MAX_VIDA;
-    #namePersonaje;
 
+    static namePersonaje = "Guerrero Enano";
     static nameAtaque1 = "Recuperar Aliento";
-    static nameAtaque1 = "Hachazo";
+    static nameAtaque2 = "Hachazo";
 
     /**
      * @param {Number} MAX_VIDA Vida maxima del personaje
      * @param {Number} vide Vida actual del personaje
      * @param {Number} poder Poder del personaje
      * @param {Number} velocidad Velocidad del personaje
-     * @param {String} namePersonaje Nombre del personaje
      */
     constructor() {
         super();
 
         this.MAX_VIDA = 90;
-
-        this.#namePersonaje = "Guerrero Enano";
 
         this.vida = this.MAX_VIDA;
         this.poder = 20;
@@ -35,7 +32,7 @@ class GuerreroEnano extends Personaje {
      * @returns {String} 
      */
     get namePersonaje() {
-        return this.#namePersonaje;
+        return this.constructor.namePersonaje;
     }
 
     /**

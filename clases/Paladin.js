@@ -4,8 +4,8 @@ const fs = require("fs");
 class Paladin extends Personaje {
 
     MAX_VIDA;
-    #namePersonaje;
 
+    static namePersonaje = "Paladin Humano";
     static nameAtaque1 = "Ataque Divino";
     static nameAtaque2 = "Último Recurso";
 
@@ -14,13 +14,10 @@ class Paladin extends Personaje {
      * @param {Number} vide Vida actual del personaje
      * @param {Number} poder Poder del personaje
      * @param {Number} velocidad Velocidad del personaje
-     * @param {String} namePersonaje Nombre del personaje
      */
     constructor() {
         super();
         this.MAX_VIDA = 75;
-
-        this.#namePersonaje = "Paladin Humano";
 
         this.vida = this.MAX_VIDA;
         this.poder = 25;
@@ -33,7 +30,7 @@ class Paladin extends Personaje {
      * @returns {String} 
      */
     get namePersonaje() {
-        return this.#namePersonaje;
+        return this.constructor.namePersonaje;
     };
 
     /**

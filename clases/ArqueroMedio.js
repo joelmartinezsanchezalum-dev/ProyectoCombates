@@ -4,23 +4,20 @@ const fs = require("fs");
 class ArqueroMedio extends Personaje {
 
     MAX_VIDA;
-    #namePersonaje
 
+    static namePersonaje = "Arquero Medio";
     static nameAtaque1 = "Tiro preciso";
-    static nameAtaque1 = "Tiro multiple";
+    static nameAtaque2 = "Tiro multiple";
 
     /**
      * @param {Number} MAX_VIDA Vida maxima del personaje
      * @param {Number} vide Vida actual del personaje
      * @param {Number} poder Poder del personaje
      * @param {Number} velocidad Velocidad del personaje
-     * @param {String} namePersonaje Nombre del personaje
      */
     constructor() {
         super();
         this.MAX_VIDA = 50;
-
-        this.#namePersonaje = "Arquero Medio";
 
         this.vida = this.MAX_VIDA;
         this.poder = 30;
@@ -34,7 +31,7 @@ class ArqueroMedio extends Personaje {
      * @returns {String} 
      */
     get namePersonaje() {
-        return this.#namePersonaje;
+        return this.constructor.namePersonaje;
     }
 
     /**

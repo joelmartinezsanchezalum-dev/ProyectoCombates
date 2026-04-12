@@ -14,10 +14,10 @@ function mostrarMenu() {
     console.clear();
 
     console.log("Bienvenido a ¡COMBATES AUTOMATICOS!\n");
-    console.log("1. Crear nuevo personaje");
-    console.log("2. Ver estadisticas");
-    console.log("3. Luchar");
-    console.log("0. Salir\n");
+    console.log("1- Crear nuevo personaje");
+    console.log("2- Ver estadisticas");
+    console.log("3- Luchar");
+    console.log("0- Salir\n");
 };
 
 /**
@@ -28,13 +28,35 @@ function mostrarPersonajes() {
 
     console.log("Personajes disponibles:\n");
     console.log("1- Paladin Humano");
-    console.log("2- Mago Elfo ");
+    console.log("2- Mago Elfo");
     console.log("3- Guerrero Enano");
-    console.log("4- Arquero Mediano\n");
+    console.log("4- Arquero Medio\n");
+    console.log("0- Volver\n");
 };
 
 /**
- * Procedimiento para mostrar las estadisticas de los personajes del usuario
+ * Funcion para crear el personaje elegido en el menu.
+ * 
+ * @param {String} opcionPersonaje opcion elegida por el usuario
+ * @returns {Paladin | MagoElfo | GuerreroEnano | ArqueroMedio | null}
+ */
+function crearPersonaje(opcionPersonaje) {
+    switch (opcionPersonaje) {
+        case "1":
+            return new Paladin();
+        case "2":
+            return new MagoElfo();
+        case "3":
+            return new GuerreroEnano();
+        case "4":
+            return new ArqueroMedio();
+        default:
+            return null;
+    }
+}
+
+/**
+ * Procedimiento para mostrar las estadisticas guardadas en el archivo csv.
  */
 function mostrarEstadisticas() {
     if (!fs.existsSync("./estadisticas.csv")) {
@@ -45,6 +67,8 @@ function mostrarEstadisticas() {
     for (let i = 0; i < 5; i++) {
         informacion[i] = informacion[i].split(";");
     }
+    console.log(informacion[0][0]);
+    
     console.log("╔═════════════════╦═══════════════════════╦═══════════════════════╦═══════════════════════╗")
     console.log("║ " + informacion[0][0] + "       ║\t" + informacion[0][1] + "\t  ║\t   " + informacion[0][2] + "\t  ║    " + informacion[0][3] + "\t  ║")
     console.log("╠═════════════════╬═══════════════════════╬═══════════════════════╬═══════════════════════╣")
@@ -62,9 +86,10 @@ function mostrarEstadisticas() {
  * Procedimiento para modificar las estadisticas
  * 
  * Creamos el archivo para guardar las estadisticas si no existiera
+ * y actualizamos la ultima partida jugada.
  * 
  * @param {Paladin | ArqueroMedio | GuerreroEnano | MagoElfo} personaje Personaje que ha elegido el usuario
- * @param {Boolean} resultado True si el usuario a ganado 
+ * @param {Boolean} resultado True si el usuario ha ganado 
  */
 function modificarEstadisticas(personaje, resultado) {
     if (!fs.existsSync("./estadisticas.csv")) {
@@ -87,9 +112,9 @@ function modificarEstadisticas(personaje, resultado) {
 /**
  * Procedimiento para sumar la ultima partida al archivo de estadisticas
  * 
- * @param {Paladin | ArqueroMedio | GuerreroEnano | MagoElfo} personaje Personaje que ha elegido el usuario * 
- * @param {String} informacion contenido del archivo de estadisticas 
- * @param {Boolean} resultado True si el usuario a ganado
+ * @param {Paladin | ArqueroMedio | GuerreroEnano | MagoElfo} personaje Personaje que ha elegido el usuario
+ * @param {Array} informacion contenido del archivo de estadisticas separado por filas y columnas
+ * @param {Boolean} resultado True si el usuario ha ganado
  */
 function asignacion(personaje, informacion, resultado) {
     let victoria;
@@ -127,30 +152,30 @@ let resultado;
 do {
 
     mostrarMenu();
-    opcion = prompt("Que desas hacer: ");
+    opcion = prompt("Que deseas hacer: ");
     console.clear();
 
-    if ("1234".includes(opcion)) {
+    if ("0123".includes(opcion)) {
 
         switch (opcion) {
             case "1":
                 mostrarPersonajes();
                 opcionPersonaje = prompt("Elige el personaje: ");
 
-                switch (opcionPersonaje) {
-                    case "1":
-                        personaje = new Paladin();
-                        break;
-                    case "2":
-                        personaje = new MagoElfo();
-                        break;
-                    case "3":
-                        personaje = new GuerreroEnano();
-                        break;
-                    case "4":
-                        personaje = new ArqueroMedio();
-                        break;
+                if (opcionPersonaje === "0") {
+                    prompt("Volviendo al menu...");
+                    break;
                 }
+
+                const nuevoPersonaje = crearPersonaje(opcionPersonaje);
+
+                if (!nuevoPersonaje) {
+                    prompt("Personaje no valido. Pulsa ENTER para continuar...");
+                    break;
+                }
+
+                personaje = nuevoPersonaje;
+                prompt(`Has creado a ${personaje.namePersonaje}. Pulsa ENTER para continuar...`);
                 break;
 
             case "2":
@@ -159,13 +184,19 @@ do {
                 break;
 
             case "3":
-                if (typeof (personaje) == 'undefined') {
-                    prompt("Crea un personaje primero")
+                if (typeof personaje === "undefined") {
+                    prompt("Debes crear un personaje antes de luchar. Pulsa ENTER para continuar...")
                     break;
                 }
 
                 //Creamos el gestor, que nos pone un contrincante aleatorio
                 let gestor = new GestorCombate(personaje);
+
+                gestor.mostrarPersonajes();
+                gestor.mostrarSalud();
+                console.log("Ha aparecido " + gestor.maquina.namePersonaje + " para enfrentarse a " + gestor.usuario.namePersonaje + " del jugador.");
+                prompt("Presiona ENTER para empezar el combate");
+                console.clear();
 
                 do {
                     //El gestor genera un turno de ataques (ataque aleatorio, ataca el más rápido primero)
@@ -190,7 +221,7 @@ do {
                 break;
 
             case "0":
-                prompt("Saliendo...");
+                console.log("Saliendo...");
                 break;
 
             default:
@@ -198,5 +229,7 @@ do {
                 break;
         }
 
+    } else {
+        prompt("Opcion no valida. Pulsa ENTER para continuar...");
     }
 } while (opcion !== '0');

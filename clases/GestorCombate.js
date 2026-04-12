@@ -16,7 +16,6 @@ class GestorCombate {
      * @param {Boolean} partidaAcabada Estado partida
      * @param {Paladin | ArqueroMedio | GuerreroEnano | MagoElfo} j1 Personaje elegido por el usuario
      * @param {Paladin | ArqueroMedio | GuerreroEnano | MagoElfo} maquina Personaje elegido por la maquina 
-     * @param {Paladin | ArqueroMedio | GuerreroEnano | MagoElfo} maquina Personaje elegido por laBoolean 
      * @param {Array} jugadores Los dos jugadores, el indice[0] sera el jugador mas rapido
      * @param {Boolean} rapido Estado para saber si el usuario es mas rapido que la maquina
      */
@@ -71,30 +70,49 @@ class GestorCombate {
     };
 
     /**
-     * Funcion en la cual se realiza una ronda, en la que los dos jugadores atacan, en el caso de que
-     * el contricante no haya esquoivado.
+      * Funcion en la cual se realiza una ronda completa.
      * 
-     * Y comprovamos si alguno de los dos jugadores no han muerto.
+      * Los dos jugadores atacan por orden de velocidad, el ataque se elige de manera aleatoria
+      * y en el historial se muestra quien ataca, que ataque usa y que ocurre en el turno.
+      * 
+      * Si el ataque tiene efecto propio como curacion, ese efecto se aplica aunque el rival esquive.
+      * 
+      * Al final comprobamos si alguno de los dos jugadores ha llegado a 0 de vida.
      * 
      * @returns {Array} Devuelve una lista de movimientos de los dos jugadores en una ronda completa 
      */
     ataque() {
         let daño;
         let historial = [];
+        let rolAtacante;
+        let rolDefensor;
+        let nombreAtaque;
 
         for (let x = 0; x < this.jugadores.length; x++) {
-            if (!this.jugadores[Number(!x)].esquivar()) {
-                let numAtaque = Math.round(Math.random());
-                daño = numAtaque ? this.jugadores[Number(x)].ataque1() : this.jugadores[x].ataque2();
+            let numAtaque = Math.round(Math.random());
+            let atacante = this.jugadores[x];
+            let defensor = this.jugadores[Number(!x)];
 
-                this.jugadores[Number(!x)].vida -= daño;
+            //Strings que contienenn el rol del atacante y defensor para mostrar en el historial, y el nombre del ataque que se va a usar
+            rolAtacante = atacante == this.usuario ? "JUGADOR" : "ENEMIGO";
+            rolDefensor = defensor == this.usuario ? "JUGADOR" : "ENEMIGO";
+            nombreAtaque = numAtaque ? atacante.constructor.nameAtaque1 : atacante.constructor.nameAtaque2;
+
+            daño = numAtaque ? atacante.ataque1() : atacante.ataque2();
+
+            if (!defensor.esquivar()) {
+                defensor.vida -= daño;
                 if (daño == 0) {
-                    historial.push(`${this.jugadores[x].namePersonaje} ha recuperado ${this.jugadores[x].poder * 1.5} de vida`);
+                    historial.push("[" + rolAtacante + "] " + atacante.namePersonaje + " usa " + nombreAtaque + " y recupera " + (atacante.poder * 1.5) + " de vida");
                     continue;
                 }
-                historial.push(`${this.jugadores[x].namePersonaje} ha causado ${daño} de daño a ${this.jugadores[Number(!x)].namePersonaje}`);
+                historial.push("[" + rolAtacante + "] " + atacante.namePersonaje + " usa " + nombreAtaque + " y causa " + daño + " de daño a " + defensor.namePersonaje);
             } else {
-                historial.push(`${this.jugadores[Number(!x)].namePersonaje} ha esquivado el ataque de ${this.jugadores[Number(x)].namePersonaje}`);
+                if (daño == 0) {
+                    historial.push("[" + rolAtacante + "] " + atacante.namePersonaje + " usa " + nombreAtaque + " y recupera " + (atacante.poder * 1.5) + " de vida");
+                    continue;
+                }
+                historial.push("[" + rolDefensor + "] " + defensor.namePersonaje + " esquiva " + nombreAtaque + " de " + atacante.namePersonaje);
             };
         };
         // Comprobamos si alguno de los dos jugadores ha muerto
@@ -104,8 +122,7 @@ class GestorCombate {
     };
 
     /**
-     * 
-     * @returns {boolean} Comprovamos el personaje del usuario a ganado
+     * @returns {boolean} Devuelve true si el personaje del usuario ha ganado el combate
      */
     checkWin() {
         if (this.usuario.vida == 0 && this.maquina.vida >= 0) {
@@ -113,6 +130,8 @@ class GestorCombate {
         } else if (this.usuario.vida > 0 && this.maquina.vida == 0) {
             return true;
         };
+
+        return false;
     };
 
     /**
@@ -129,12 +148,41 @@ class GestorCombate {
     };
 
     /**
-     * Procedimiento para mostrar la vida de los personajes
+     * Procedimiento para mostrar la vida de los personajes con una barra sencilla
+     * y la vida actual sobre la vida maxima.
      */
     mostrarSalud() {
-        console.log(`Jugador: ${this.usuario.vida}`);
-        console.log(`Enemigo: ${this.maquina.vida}`);
+        let barraJugador = "";
+        let barraEnemigo = "";
+        let vidaJugador = Math.round((this.usuario.vida / this.usuario.MAX_VIDA) * 20);
+        let vidaEnemigo = Math.round((this.maquina.vida / this.maquina.MAX_VIDA) * 20);
 
+        for (let i = 0; i < 20; i++) {
+            if (i < vidaJugador) {
+                barraJugador += "#";
+            } else {
+                barraJugador += "-";
+            }
+        }
+
+        for (let i = 0; i < 20; i++) {
+            if (i < vidaEnemigo) {
+                barraEnemigo += "#";
+            } else {
+                barraEnemigo += "-";
+            }
+        }
+
+        console.log("════════════════════════════════════════");
+        console.log("         ESTADO DEL COMBATE");
+        console.log("════════════════════════════════════════");
+        console.log("JUGADOR: " + this.usuario.namePersonaje);
+        console.log("[" + barraJugador + "] " + this.usuario.vida + "/" + this.usuario.MAX_VIDA);
+        console.log("");
+        console.log("ENEMIGO: " + this.maquina.namePersonaje);
+        console.log("[" + barraEnemigo + "] " + this.maquina.vida + "/" + this.maquina.MAX_VIDA);
+        console.log("════════════════════════════════════════");
+        console.log("");
     }
 
     /**
@@ -145,8 +193,8 @@ class GestorCombate {
     };
 
     /**
-     * Procedimiento para mostrar los personajes en imagen ascoii
-    */
+     * Procedimiento para mostrar los personajes en arte ascii antes de cada ronda.
+     */
     mostrarPersonajes() {
         const personajeUsuario = this.usuario.arteAscii(true);
         const personajeMaquina = this.maquina.arteAscii(false);
